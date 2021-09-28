@@ -1,0 +1,63 @@
+**basic policy** 
+Variable name:  camel style
+Constant : in hoa
+ten ham bat dau bang dong tu
+ten package in thuong toan bo
+moi ham lam 1 cong viec, dam bao khi xoa hoac sua ham cac ham khac khong bi anh huong
+
+Class Vaccine:
+thuoc tinh:
+String vaccineId: V001...
+String vaccineName: google.
+ 
+hanh vi:
+get()
+----------------
+Class Student:
+thuoc tinh:
+String studentId: nonblank - unique, regex SExxxxxx, SAxxxxxx, SSxxxxxx
+String studentName: nonblank
+
+hanh vi
+addStudent();
+constructors, getset
+-------------
+
+Class injection
+injectionId nonblank, unique, regex: Ixxxxx
+
+Student studentId - linked - kiem tra ton tai
+Vaccine vaccineId - linked - kiem tra
+
+String firstInjectionDate (sau 08/03/2021)
+String secondInjectionDate (sau 08/03/2021) (sau mui 1 tu 4 den 12 tuan)
+String firstInjectionPlace nonblank module(64 chon)
+String secondInjectionPlace nonblank module(64 chon)
+
+hanh vi:
+constructors, getset
+Show()
+addNew()
+update(injectionId)
+delete()
+searchById()
+-----------------------
+Class DataValidation
+boolean checkExistance(Arraylist)
+boolean checkDate(valid or not)
+nonblank()
+String getID(String regex)
+boolean checkDayAfter(08/03)
+boolean checkDate2ndInjection(min = 4 / max = 12);
+
+
+
+
+
+
+
+
+
+
+
+
