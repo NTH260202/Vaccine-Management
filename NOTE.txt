@@ -26,8 +26,8 @@ constructors, getset
 Class injection
 injectionId nonblank, unique, regex: Ixxxxx
 
-Student studentId - linked - kiem tra ton tai
-Vaccine vaccineId - linked - kiem tra
+String studentId - linked - kiem tra ton tai
+String vaccineId - linked - kiem tra
 
 String firstInjectionDate (sau 08/03/2021)
 String secondInjectionDate (sau 08/03/2021) (sau mui 1 tu 4 den 12 tuan)
