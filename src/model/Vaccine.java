@@ -28,7 +28,4 @@ public class Vaccine {
     public void setVaccineName(String vaccineName) {
         this.vaccineName = vaccineName;
     }
-
-
-
 }

@@ -3,8 +3,8 @@ package model;
 public class Injection {
     
     private String injectId;
-    private Student studentId;
-    private Vaccine vaccineId;
+    private String studentId;
+    private String vaccineId;
     private String firstInjectionDate;
     private String secondInjectionDate;
     private String firsttInjectionPlace;
@@ -18,19 +18,19 @@ public class Injection {
         this.injectId = injectId;
     }
 
-    public Student getStudentId() {
+    public String getStudentId() {
         return this.studentId;
     }
 
-    public void setStudentId(Student studentId) {
+    public void setStudentId(String studentId) {
         this.studentId = studentId;
     }
 
-    public Vaccine getVaccineId() {
+    public String getVaccineId() {
         return this.vaccineId;
     }
 
-    public void setVaccineId(Vaccine vaccineId) {
+    public void setVaccineId(String vaccineId) {
         this.vaccineId = vaccineId;
     }
 
@@ -70,7 +70,7 @@ public class Injection {
 
     }
 
-    public Injection(String injectId, Student studentId, Vaccine vaccineId
+    public Injection(String injectId, String studentId, String vaccineId
                     , String firstInjectionDate, String secondInjectionDate 
                     , String firsttInjectionPlace, String secondtInjectionPlace) {
         this.injectId = injectId;
