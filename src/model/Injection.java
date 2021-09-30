@@ -85,6 +85,6 @@ public class Injection {
     @Override
     public String toString() {
         return "Injection{ Injection ID: " + injectId + " Student ID: " + studentId + " Vaccine ID: " + vaccineId + " First Injection Date: " + firstInjectionDate + " Second Injection Date: " + secondInjectionDate + 
-                "First Injection Place: " + firstInjectionDate + "Second Injection Place" + secondtInjectionPlace + "}";
+                " First Injection Place: " + firstInjectionDate + " Second Injection Place:" + secondtInjectionPlace + "}";
     }
 }
