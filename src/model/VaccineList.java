@@ -1,5 +1,6 @@
 package model;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -10,10 +11,6 @@ public class VaccineList {
     static Scanner scanner = new Scanner(System.in);
     protected static void openFileToRead(String fileName) throws IOException {
         try {
-            File file = new File(fileName);
-            if (!file.exists()) {
-                file.createNewFile();
-            }
             scanner = new Scanner(Paths.get(fileName), "UTF-8");
         } catch (IOException e) {
             e.printStackTrace();

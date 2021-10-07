@@ -6,7 +6,9 @@ import java.util.Scanner;
 
 class DataValidation {
     Scanner scanner = new Scanner(System.in);
-
+    StudentList studentList = new StudentList();
+    VaccineList vaccineList = new VaccineList();
+    InjectionList injectionList = new InjectionList();
     public String inputNonblankString() {
         String result = "";
         boolean cont = false;
@@ -141,6 +143,44 @@ class DataValidation {
         return secondInjectionDate;
     }
 
+    public int inputPositiveInteger() {
+        int result = 0;
+        boolean cont = false;
+
+        do {
+            try {
+                result = Integer.parseInt(scanner.nextLine());
+                if (result <= 0)
+                    throw new Exception("This cannot be negative or zero! Please re-input!");
+                cont = false;
+            } catch (Exception e) {
+                System.out.println("Input error: " + e.getMessage());
+                cont = true;
+            }
+        } while (cont);
+
+        return result;
+    }
+
+    public int inputChoice(int max) {
+        int choice = 0;
+        boolean cont = false;
+
+        do {
+            try {
+                System.out.println("Enter choice: ");
+                choice = inputPositiveInteger();
+                if (choice < 1 || choice > max)
+                    throw new Exception("Invalid choice!");
+                cont = false;
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
+                cont = true;
+            }
+        } while (cont);
+        return choice;
+    }
+
     public boolean checkSecondInjectionDate(LocalDate secondInjectionDate, LocalDate firstInjectionDate) {
         if (compare2Days(secondInjectionDate, firstInjectionDate.plusWeeks(4)) < 0
                 || compare2Days(secondInjectionDate, firstInjectionDate.plusWeeks(12)) > 0)
@@ -150,24 +190,32 @@ class DataValidation {
     }
 
     public boolean checkIDExistance(String id, String fileName) {
+
         if (fileName.equals("Student.dat")) {
+
             ArrayList<Student> stdList = StudentList.readStudentFromFile(fileName);
             for(var std : stdList) {
                 if(std.getStudentId().equals(id)) return true;
             }
         }
 
+      
+
+
         if (fileName.equals("Vaccine.dat")) {
+
             ArrayList<Vaccine> vacList = VaccineList.readVaccineFromFile(fileName);
             for(var vac : vacList) {
                 if(vac.getVaccineId().equals(id)) return true;
             }
         }
 
+
         if (fileName.equals("Injection.dat")) {
             ArrayList<Injection> injectList = InjectionList.readInjectionFromFile(fileName);
             for(var inject : injectList) {
                 if(inject.getInjectId().equals(id)) return true;
+
             }
         }
         return false;

@@ -77,23 +77,66 @@ public class InjectionList {
     public Injection inputInjection() {
         Injection injection = new Injection();
         DataValidation dv = new DataValidation();
-
-        System.out.println("Injection ID: ");
-        injection.setInjectId(dv.getID("ISV\\d{5}"));
-        System.out.println("Student ID: ");
-        injection.setStudentId(dv.getID("SE\\d{6}"));
-        System.out.println("Vaccine ID: ");
-        injection.setVaccineId(dv.getID("V\\d{2}"));
+        boolean cont = false;
+        do {
+            try {
+                System.out.println("Injection ID: ");
+                String injID = dv.getID("ISV\\d{5}");
+                if (dv.checkIDExistance(injID, "Injection.dat"))
+                    throw new Exception("<!> Injection ID already exists, please check and re-input <!>");
+                injection.setStudentId(injID);
+                cont = false;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                cont = true;
+            }
+        } while (cont);
+        
+        do {
+            try {
+                System.out.println("Student ID: ");
+                String stdID = dv.getID("SE\\d{6}");
+                if (!dv.checkIDExistance(stdID, "Student.dat"))
+                    throw new Exception("<!> Student does not exist, please check and re-input <!>");
+                injection.setStudentId(stdID);
+                cont = false;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                cont = true;
+            }
+        } while (cont);
+        do {
+            try {
+                System.out.println("Vaccine ID: ");
+                String vacID = dv.getID("V\\d{2}");
+                if (!dv.checkIDExistance(vacID, "Vaccine.dat"))
+                    throw new Exception("<!> Vaccine does not exist, please check and re-input <!>");
+                injection.setVaccineId(vacID);
+                cont = false;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                cont = true;
+            }
+        } while (cont);
         System.out.println("Fist injection date: ");
         injection.setFirstInjectionDate(dv.inputFirstInjectionDate());
         System.out.println("1st injection Place");
         injection.setFirsttInjectionPlace(dv.inputNonblankString());
-        System.out.println("2nd injection date: ");
-        injection.setSecondInjectionDate(
-                dv.inputSecondInjectionDate(dv.convertToDate(injection.getFirstInjectionDate())));
-        System.out.println("2nd injection Place: ");
-        injection.setSecondtInjectionPlace(dv.inputNonblankString());
-        addInjection(injection);
+        System.out.println("Input second injection right now? 1 for YES 2 for NO");
+        int seconndInj = dv.inputChoice(2);
+        switch (seconndInj) {
+            case 1:
+                System.out.println("2nd injection date: ");
+                injection.setSecondInjectionDate(
+                        dv.inputSecondInjectionDate(dv.convertToDate(injection.getFirstInjectionDate())));
+                System.out.println("2nd injection Place: ");
+                injection.setSecondtInjectionPlace(dv.inputNonblankString());
+                break;
+            case 2:
+                injection.setSecondInjectionDate("null");
+                injection.setSecondtInjectionPlace("null");
+                break;
+        }
         return injection;
     }
 
