@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 class DataValidation {
@@ -148,7 +149,27 @@ class DataValidation {
             return true;
     }
 
-    public boolean checkExistance() {
-        return true;
+    public boolean checkIDExistance(String id, String fileName) {
+        if (fileName.equals("Student.dat")) {
+            ArrayList<Student> stdList = StudentList.readStudentFromFile(fileName);
+            for(var std : stdList) {
+                if(std.getStudentId().equals(id)) return true;
+            }
+        }
+
+        if (fileName.equals("Vaccine.dat")) {
+            ArrayList<Vaccine> vacList = VaccineList.readVaccineFromFile(fileName);
+            for(var vac : vacList) {
+                if(vac.getVaccineId().equals(id)) return true;
+            }
+        }
+
+        if (fileName.equals("Injection.dat")) {
+            ArrayList<Injection> injectList = InjectionList.readInjectionFromFile(fileName);
+            for(var inject : injectList) {
+                if(inject.getInjectId().equals(id)) return true;
+            }
+        }
+        return false;
     }
 }
