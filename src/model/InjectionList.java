@@ -10,11 +10,68 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class InjectionList {
-    ArrayList<Injection> list = new ArrayList<Injection>();
+    ArrayList<Injection> list = new ArrayList<>();
 
     public void addInjection(Injection injection) {
         list.add(injection);
         writeInjectionToFile(injection, "Injection.DAT");
+    }
+
+    public void updateInjection() {
+        DataValidation dv = new DataValidation();
+        String ID;
+        do {
+            System.out.println("Injection ID: ");
+            ID = dv.getID("ISV\\d{5}");
+        } while (dv.checkIDExistance(ID, "Injection.dat"));
+
+        Injection injection=list.get(searchByInjectId(ID));
+
+        if (injection.getSecondtInjectionPlace().equalsIgnoreCase("null")){
+            System.out.println("2nd injection date: ");
+            injection.setSecondInjectionDate(
+                    dv.inputSecondInjectionDate(dv.convertToDate(injection.getFirstInjectionDate())));
+            System.out.println("2nd injection Place: ");
+            injection.setSecondtInjectionPlace(dv.inputNonblankString());
+        } else System.out.println("Student injected 2 times! It can not be updated!");
+
+    }
+
+    private int searchByInjectId(String ID) {
+        for (Injection element: list) {
+            if (ID.equalsIgnoreCase(element.getInjectId())) return list.indexOf(element);
+        }
+        return -1;
+    }
+
+    public void searchByStuId() {
+        DataValidation dv = new DataValidation();
+        String ID;
+        boolean isExisted = false;
+        do {
+            System.out.println("Student ID: ");
+            ID = dv.getID("SE\\d{6}");
+        } while (dv.checkIDExistance(ID, "Student.dat"));
+
+        for (Injection element: list) {
+            if (ID.equalsIgnoreCase(element.getStudentId())) {
+                System.out.println(element);
+                isExisted = true;
+            }
+        }
+
+        if (!isExisted) System.out.println("Injection information of this ID is not existed!");
+    }
+
+    public void deleteByInjectID() {
+        DataValidation dv = new DataValidation();
+        String ID;
+        do {
+            System.out.println("Injection ID: ");
+            ID = dv.getID("ISV\\d{5}");
+        } while (dv.checkIDExistance(ID, "Injection.dat"));
+
+        list.remove(searchByInjectId(ID));
     }
 
     public Injection inputInjection() {
